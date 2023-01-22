@@ -1,0 +1,69 @@
+//Personal Guide To Dynamic Programming 
+->Where greedy fails DP comes to rescue
+->Prerequisite = Awareness About the terms
+BASIC FORMAT
+int s(){
+//base cases
+return s()+s()
+}
+Lets Start By first identifying The type of Questions
+1D Questions 
+1.Climbing Stairs == Fibonacci Series
+2.Frog Jump
+4.Maximum Sum of Non Adjacent element
+5.House Robber2
+//This is called 1D as we are using 1D array For Tabulation or Memoization
+//Lets Discuss the format to cater all 1D question
+int s(){
+//Base Condition Differ for Each Question
+return //Return will be s()+s() for questions like count
+       //min(s(),s()) or max(s(),s()) based on question
+}
+//For Base case always remember or try to ask yourself what if
+1.Negative Value is there
+2.Out of Bound Conditions
+//It is preferable if your recursion returns 0 or 1 or both 
+
+1. CLIMBING STAIRS
+int s(int i){
+  if(i==1) return 1;
+  if(i==2) return 1;
+  return s(i-1)+s(i-2);
+}
+2. FROG JUMP
+int s(int i){
+  if(i==0) return 0;
+  int l=s(i-1)+abs(h[i]-h[i-1]);
+  int r=1e9;
+  if(i>1)
+  r=s(i-2)+abs(h[i]-h[i-2]);
+  return min(l,r);
+}
+3.MAXIMUM SUM OF NON-ADJACENT ELEMENT
+  //From this Two basic variable namely take and nottake will come to your rescue
+  //take contains value at that index +function call to (n-1)
+  //nottake  only function call to (n-1)
+    int s(int i){
+      if(i==0) return arr[0];
+      if(i<0) return 0;
+      int take=arr[i]+s(i-2);
+      int nottake=s(i-1);
+      return max(take,nottake);
+    }
+4.HOUSE ROBBER
+  //House Robber is a slight Extension of Above problem
+  //here we will first make two array one without first element , the other without last element
+  // then simple calling MAXIMUM SUM OF NON-ADJACENT ELEMENT say p()
+  for(int i=0;i<n;i++){
+    if(i!=0) a1.push_back(arr[i]);
+    if(i!=n-1) a2.push_back(arr[i]);
+  }
+  return max(s(a1,n),s(a2,n));
+  
+  // HOW TO MEMOIZE THESE PROBLEM TO REDUCE OVERLAPPING SUBPROBLEM
+  -> make a vector<int> v initialse it to (n,-1)
+  -> add one more Base condition if(dp[i]!=-1) return dp[i]
+  -> and before returning store the values in dp[i]
+  
+  
+  ................................................................2D DP COMING NEXT WEEK.................................................................
